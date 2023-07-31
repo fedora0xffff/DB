@@ -1,0 +1,17 @@
+CXX=g++
+FLAGS=-std=c++17
+
+TestDateT: testDate.o date.o unitT.o
+	$(CXX) $(FLAGS) testDate.o date.o -o TestDateT
+
+testDate.o: unitT.o date.o testDate.cpp
+	$(CXX) $(FLAGS) UnitT.o date.o testDate.cpp -o testDate.o
+
+date.o: 
+	$(cxx) $(flags) date.cpp date.h -o date.o
+
+unitT.o: 
+	$(CXX) $(FLAGS) UnitTestFramework.cpp UnitTestFramework.h -o unitT.o
+
+clean: 
+	rm *.o TestDateT
