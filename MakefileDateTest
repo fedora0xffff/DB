@@ -1,17 +1,10 @@
-CXX=g++
-FLAGS=-std=c++17
+CXX = g++
+CXXFLAGS = -std=c++17
+objects =  UnitTestFramework.o date.o testDate.o
 
-TestDateT: testDate.o date.o unitT.o
-	$(CXX) $(FLAGS) testDate.o date.o -o TestDateT
+all: $(objects)
 
-testDate.o: unitT.o date.o testDate.cpp
-	$(CXX) $(FLAGS) UnitT.o date.o testDate.cpp -o testDate.o
-
-date.o: 
-	$(cxx) $(flags) date.cpp date.h -o date.o
-
-unitT.o: 
-	$(CXX) $(FLAGS) UnitTestFramework.cpp UnitTestFramework.h -o unitT.o
+$(objects): %.o: %.cpp %.h
 
 clean: 
-	rm *.o TestDateT
+	rm *.o
