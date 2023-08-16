@@ -36,3 +36,9 @@ bool operator!=(const Date& lhs, const Date& rhs) {
 	 if (lhs.yyyy_ < rhs.yyyy_ && lhs.mm_ < rhs.mm_ && lhs.dd_ < rhs.dd_ ) return true;
 	 else return false; 
  }
+
+ bool operator>(const Date& lhs, const Date& rhs) {
+ 	if (!(lhs<rhs) && lhs!=rhs) return true;
+ 	else return false;
+ }
+

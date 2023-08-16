@@ -1,0 +1,11 @@
+CXX = g++
+CXXFLAGS = -std=c++17
+objects =  UnitTestFramework.o date.o database.o main.o 
+
+all: $(objects)
+	$(CXX) -o $@ $(CXXFLAGS) $(objects) $(LDFLAGS) $(LDLIBS)
+
+$(objects): %.o: %.cpp %.h
+
+clean: 
+	rm *.o

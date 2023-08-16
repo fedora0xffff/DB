@@ -15,4 +15,4 @@ class Database {
 
     private:
     std::map<Date, std::string> db_;
-}
+};

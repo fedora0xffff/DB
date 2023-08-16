@@ -1,16 +1,41 @@
 #include "database.h"
 #include "date.h"
-#include "condition_parser.h"
-#include "node.h"
+//#include "condition_parser.h"
+//#include "node.h"
 #include "UnitTestFramework.h"
+#include "main.h"
 
 #include <iostream>
 #include <stdexcept>
 
 using namespace std;
 
-string ParseEvent(istream& is) {
-  // Реализуйте эту функцию
+string ParseEvent(istream& is) { //test
+	std::string event;
+	std::string all; 
+	char c;
+	bool first = true;
+	while(std::get(is,c)){
+		if (c!=' '){
+			while (std::getline(is, event, ' ')){ //check if it works oke when there's ony 1 word
+				if (first && event!=" ") {
+					all += event;
+					first = false;
+				}
+				else if (event != " ") {
+					all += " ";
+					all += event;
+				}
+			}
+		}	
+		else {
+			continue;
+		}
+	}
+#ifdef DEBUG
+		std::cout << "parsed event: " << all << std::endl;
+#endif
+	return all;
 }
 
 void TestAll();
@@ -31,25 +56,7 @@ int main() {
       db.Add(date, event);
     } else if (command == "Print") {
       db.Print(cout);
-    } else if (command == "Del") {
-      auto condition = ParseCondition(is);
-      auto predicate = [condition](const Date& date, const string& event) {
-        return condition->Evaluate(date, event);
-      };
-      int count = db.RemoveIf(predicate);
-      cout << "Removed " << count << " entries" << endl;
-    } else if (command == "Find") {
-      auto condition = ParseCondition(is);
-      auto predicate = [condition](const Date& date, const string& event) {
-        return condition->Evaluate(date, event);
-      };
-
-      const auto entries = db.FindIf(predicate);
-      for (const auto& entry : entries) {
-        cout << entry << endl;
-      }
-      cout << "Found " << entries.size() << " entries" << endl;
-    } else if (command == "Last") {
+        } else if (command == "Last") {
       try {
           cout << db.Last(ParseDate(is)) << endl;
       } catch (invalid_argument&) {
@@ -86,5 +93,28 @@ void TestParseEvent() {
 void TestAll() {
   TestRunner tr;
   tr.RunTest(TestParseEvent, "TestParseEvent");
-  tr.RunTest(TestParseCondition, "TestParseCondition");
+ // tr.RunTest(TestParseCondition, "TestParseCondition");
 }
+
+/*
+ } else if (command == "Del") {
+      auto condition = ParseCondition(is);
+      auto predicate = [condition](const Date& date, const string& event) {
+        return condition->Evaluate(date, event);
+      };
+      int count = db.RemoveIf(predicate);
+      cout << "Removed " << count << " entries" << endl;
+    } else if (command == "Find") {
+      auto condition = ParseCondition(is);
+      auto predicate = [condition](const Date& date, const string& event) {
+        return condition->Evaluate(date, event);
+      };
+
+      const auto entries = db.FindIf(predicate);
+      for (const auto& entry : entries) {
+        cout << entry << endl;
+      }
+      cout << "Found " << entries.size() << " entries" << endl;
+
+ 
+ */

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <utility>
+
 
 class Date {
     public:
@@ -11,6 +13,8 @@ class Date {
     friend bool operator==(const Date& lhs, const Date& rhs);
     friend bool operator!=(const Date& lhs, const Date& rhs);
     friend bool operator<(const Date& lhs, const Date& rhs);
+    friend bool operator>(const Date& lhs, const Date& rhs);
+
     std::string PrintDate() const{
 	    std::string date{std::to_string(yyyy_) + delimiter_ + std::to_string(mm_) + delimiter_ + std::to_string(dd_)};
 	    return date;
