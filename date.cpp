@@ -1,5 +1,7 @@
 #include "date.h"
 
+
+//#define DEBUG
 Date ParseDate(std::istringstream& is) { 
 	std::vector<std::string> dates(3);
 	std::string str = "";
@@ -30,3 +32,7 @@ bool operator!=(const Date& lhs, const Date& rhs) {
 	return !(lhs == rhs);
 }
 
+ bool operator<(const Date& lhs, const Date& rhs) {
+	 if (lhs.yyyy_ < rhs.yyyy_ && lhs.mm_ < rhs.mm_ && lhs.dd_ < rhs.dd_ ) return true;
+	 else return false; 
+ }

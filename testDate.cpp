@@ -1,8 +1,8 @@
 #include "date.h"
 #include "UnitTestFramework.h"
+#include "testDate.h"
 
-
-void TestDateParsing() {
+void TestDateParsing(){
     {
         std::istringstream is("2015-12-12");
         Date d = ParseDate(is);

@@ -3,12 +3,14 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 class Date {
     public:
     friend std::ostream& operator<<(std::ostream& os, const Date& date);
     friend bool operator==(const Date& lhs, const Date& rhs);
     friend bool operator!=(const Date& lhs, const Date& rhs);
+    friend bool operator<(const Date& lhs, const Date& rhs);
     std::string PrintDate() const{
 	    std::string date{std::to_string(yyyy_) + delimiter_ + std::to_string(mm_) + delimiter_ + std::to_string(dd_)};
 	    return date;
@@ -23,11 +25,14 @@ class Date {
         if (dd > 0 && dd < 32) {
             dd_ = dd;
         }
+#ifdef DEBUG
         if (yyyy_ == 0 && mm_ == 1 && dd_ == 1) {
             std::cout << "probably sth went wrong with init\n";
 	    std::cout << "args fro cstr were " << yyyy << delim << mm << delim << dd << '\n'
-		   << "and got " << yyyy_ << delim << mm_ << delim << dd_ << delim << std::endl; 
+		   << "and got " << yyyy_ << delim << mm_ << delim << dd_ << std::endl; 
         }
+#endif
+
     }
     //copy cstr?
     private:
