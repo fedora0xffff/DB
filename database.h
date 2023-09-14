@@ -2,6 +2,7 @@
 #include <functional>
 #include <map>
 #include "date.h"
+#include "UnitTestFramework.h"
 
 
 class Database {

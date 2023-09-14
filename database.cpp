@@ -1,7 +1,10 @@
 #include "database.h"
 
 void Database::Add(const Date& date, const std::string& event){
-	if (db_.count(date)){
+	std::cout << "DBG: " << date << std::endl;
+	std::cout << "if the entered date exists " << db_.count(date) << std::endl;
+	std::cout << "DB: " << db_ << std::endl;
+	if (db_.count(date) > 0){
 		std::cout << "Such a date already exists. Overwrite (o) or ignore (i)?\n" << std::endl;
 		char action;
 		std::cin >> action;

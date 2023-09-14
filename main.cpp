@@ -7,42 +7,30 @@
 
 #include <iostream>
 #include <stdexcept>
+#define DEBUG
 
-using namespace std;
+void TestAll(); 
 
-string ParseEvent(istream& is) { //test
-	std::string event;
-	std::string all; 
+std::string ParseEvent(std::istream& is) { //test
+	std::string event = {};
 	char c;
 	bool first = true;
-	while(std::get(is,c)){
-		if (c!=' '){
-			while (std::getline(is, event, ' ')){ //check if it works oke when there's ony 1 word
-				if (first && event!=" ") {
-					all += event;
-					first = false;
-				}
-				else if (event != " ") {
-					all += " ";
-					all += event;
-				}
-			}
-		}	
-		else {
-			continue;
-		}
-	}
+  is >> std::ws;
+	if (c != EOF) {
+    std::getline(is, event);
+    }	
 #ifdef DEBUG
-		std::cout << "parsed event: " << all << std::endl;
+		std::cout << "parsed event: " << event << std::endl;
 #endif
-	return all;
+	return event;
 }
 
-void TestAll();
+
 
 int main() {
-  TestAll();
+  using namespace std;
 
+  TestAll();
   Database db;
 
   for (string line; getline(cin, line); ) {
@@ -53,6 +41,9 @@ int main() {
     if (command == "Add") {
       const auto date = ParseDate(is);
       const auto event = ParseEvent(is);
+      #ifdef DEBUG
+      cout << "DBG: " << date << " " << event << endl;;
+      #endif
       db.Add(date, event);
     } else if (command == "Print") {
       db.Print(cout);
@@ -73,13 +64,14 @@ int main() {
 }
 
 void TestParseEvent() {
+  using namespace std;
   {
     istringstream is("event");
-    AssertEqual(ParseEvent(is), "event", "Parse event without leading spaces");
+    AssertEqual(ParseEvent(is), "event", "1 Parse event without leading spaces");
   }
   {
     istringstream is("   sport event ");
-    AssertEqual(ParseEvent(is), "sport event ", "Parse event with leading spaces");
+    AssertEqual(ParseEvent(is), "sport event ", "2 Parse event with leading spaces");
   }
   {
     istringstream is("  first event  \n  second event");
@@ -91,8 +83,9 @@ void TestParseEvent() {
 }
 
 void TestAll() {
-  TestRunner tr;
+  std::TestRunner tr;
   tr.RunTest(TestParseEvent, "TestParseEvent");
+  tr.RunTest(TestDateOps, "date test");
  // tr.RunTest(TestParseCondition, "TestParseCondition");
 }
 
