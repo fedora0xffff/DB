@@ -2,17 +2,33 @@
 #include <cctype>
 
 //#define DEBUG
-Date ParseDate(std::istringstream& is) { 
-	std::vector<std::string> dates(3);
-	char c;
-	c = is.peek();
-	//if (c == ' ' || c == '-' || !std::isdigit(c)) { return {};}
-	std::getline(is, dates[0], '-');
-	std::getline(is, dates[1], '-'); 
-	std::getline(is, dates[2], ' ');
-	Date date{std::stoi(dates[0]), std::stoi(dates[1]), std::stoi(dates[2])};
-    return date;
-}
+
+Date::Date(int yyyy, short mm, short dd, char delim = '-') {
+        if (yyyy >= 0 && yyyy < 10000) {
+            yyyy_ = yyyy;
+        }
+        if (mm > 1 && mm < 13) {
+            mm_ = mm;
+        }
+        if (dd > 0 && dd < 32) {
+            dd_ = dd;
+        }
+        if (yyyy_ == 0 && mm_ == 1 && dd_ == 1) {
+            std::cout << "probably sth went wrong with init\n";
+        }
+    }
+    std::string Date::PrintDate() const{
+	    std::string date{std::to_string(yyyy_) + delimiter_ + std::to_string(mm_) + delimiter_ + std::to_string(dd_)};
+	    return date;
+    }
+
+    Date::Date(const Date& d) {
+        if (!d.empty) {
+            yyyy_ = d.yyyy_;
+            mm_ = d.mm_;
+            dd_ = d.dd_;
+        }
+    }
 
 std::ostream& operator<<(std::ostream& os, const Date& date) {
     os << date.yyyy_ << date.delimiter_ << date.mm_ << date.delimiter_ << date.dd_;
@@ -39,6 +55,17 @@ bool operator!=(const Date& lhs, const Date& rhs) {
  	if (!(lhs<rhs) && lhs!=rhs) return true;
  	else return false;
  }
+
+Date ParseDate(std::istringstream& is) { 
+	std::vector<std::string> dates(3);
+	char c;
+	c = is.peek();
+	std::getline(is, dates[0], '-');
+	std::getline(is, dates[1], '-'); 
+	std::getline(is, dates[2], ' ');
+	Date date{std::stoi(dates[0]), std::stoi(dates[1]), std::stoi(dates[2])};
+    return date;
+}
 
 void TestDateOps() {
 	{

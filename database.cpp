@@ -1,7 +1,7 @@
 #include "database.h"
 
 void Database::Add(const Date& date, const std::string& event){
-	if (db_.find(date) != db_.end()){
+	if (db_.find(date) != db_.end()){ //improvement:  insert dates in set to check existence fast
 		std::cout << "Such a date already exists.\n" << std::endl;
 	}
 	else {
