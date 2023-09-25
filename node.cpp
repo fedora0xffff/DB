@@ -3,22 +3,22 @@
 
 
 bool DateComparisonNode::Evaluate(const Date& date, const std::string event) {
-    if (cmp_ == Comparison::Equal) return date_ == date;
-    else if (cmp_ == Comparison::Less) return date_ < date;
-    else if (cmp_ == Comparison::LessOrEqual)  return date_ < date || date_ == date; //improvement: overload ops
-    else if (cmp_ == Comparison::Greater) return date_ > date;
-    else if (cmp_ == Comparison::GreaterOrEqual) return date_ > date || date_ == date;
-    else if (cmp_ == Comparison::NotEqual) return date_ != date;
+    if (cmp_ == Comparison::Equal) return date == date_;
+    else if (cmp_ == Comparison::Less) return date < date_;
+    else if (cmp_ == Comparison::LessOrEqual)  return date < date_ || date == date_; //improvement: overload ops
+    else if (cmp_ == Comparison::Greater) return date > date_;
+    else if (cmp_ == Comparison::GreaterOrEqual) return date > date_ || date == date_;
+    else if (cmp_ == Comparison::NotEqual) return date != date_;
     else return false;
 }
 
 bool EventComparisonNode::Evaluate(const Date& date, const std::string event) {
-     if (cmp_ == Comparison::Equal) return event_ == event; // lexicographic comp 
-    else if (cmp_ == Comparison::Less) return event_ < event;
-    else if (cmp_ == Comparison::LessOrEqual)  return event_ <= event; //improvement: overload ops
-    else if (cmp_ == Comparison::Greater) return event_ > event;
-    else if (cmp_ == Comparison::GreaterOrEqual) return event_ >= event;
-    else if (cmp_ == Comparison::NotEqual) return event_ != event;
+     if (cmp_ == Comparison::Equal) return event == event_; // lexicographic comp 
+    else if (cmp_ == Comparison::Less) return event < event_;
+    else if (cmp_ == Comparison::LessOrEqual)  return event <= event_; //improvement: overload ops
+    else if (cmp_ == Comparison::Greater) return event > event_;
+    else if (cmp_ == Comparison::GreaterOrEqual) return event >= event_;
+    else if (cmp_ == Comparison::NotEqual) return event != event_;
     else return false; 
 }
 

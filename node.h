@@ -50,4 +50,4 @@ private:
     LogicalOperation lop_;
     std::shared_ptr<Node> leftNode;
     std::shared_ptr<Node> rightNode;
-}
+};

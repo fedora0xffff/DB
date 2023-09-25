@@ -1,13 +1,13 @@
 #include "database.h"
 #include "date.h"
-//#include "condition_parser.h"
-//#include "node.h"
+#include "condition_parser.h"
+#include "node.h"
 #include "UnitTestFramework.h"
 #include "main.h"
 
 #include <iostream>
 #include <stdexcept>
-#define DEBUG
+//#define DEBUG
 
 void TestAll(); 
 
@@ -86,7 +86,7 @@ void TestAll() {
   std::TestRunner tr;
   tr.RunTest(TestParseEvent, "TestParseEvent");
   tr.RunTest(TestDateOps, "date test");
- // tr.RunTest(TestParseCondition, "TestParseCondition");
+  tr.RunTest(TestParseCondition, "TestParseCondition");
 }
 
 /*

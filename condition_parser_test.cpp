@@ -1,4 +1,6 @@
+#include "condition_parser_test.h"
 #include "condition_parser.h"
+
 #include "UnitTestFramework.h"
 
 #include <sstream>
