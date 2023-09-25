@@ -1,6 +1,11 @@
 #pragma once
+//#include "condition_parser.h"
+#include <memory>
+#include "token.h"
 #include "date.h"
-#include "condition_parser.h"
+
+
+
 
 // Node, EmptyNode, DateComparisonNode, EventComparisonNode и LogicalOperationNode 
 
@@ -42,8 +47,7 @@ private:
 
 class LogicalOperationNode : public /*DateComparisonNode, EventComparisonNode */ Node{
 public:
-    LogicalOperationNode(LogicalOperation lo, std::shared_ptr<Node> node1, std::shared_ptr<Node> node2) : 
-    Node(), lop_(lo), leftNode(node1), rightNode(node2) {}
+    LogicalOperationNode(LogicalOperation lo, std::shared_ptr<Node> node1, std::shared_ptr<Node> node2) : Node(), lop_(lo), leftNode(node1), rightNode(node2) {}
     bool Evaluate(const Date& date, const std::string event);
     ~LogicalOperationNode() {}
 private:

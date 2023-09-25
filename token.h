@@ -1,7 +1,7 @@
 #pragma once
-
 #include <sstream>
 #include <vector>
+
 using namespace std;
 
 enum class TokenType {
@@ -17,6 +17,20 @@ enum class TokenType {
 struct Token {
   const string value;
   const TokenType type;
+};
+
+enum class Comparison {
+    Less,
+    LessOrEqual,
+    Greater,
+    GreaterOrEqual,
+    Equal,
+    NotEqual,
+};
+
+enum class LogicalOperation {
+    And,
+    Or,
 };
 
 vector<Token> Tokenize(istream& cl);

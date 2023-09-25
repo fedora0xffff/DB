@@ -1,12 +1,14 @@
-#include "database.h"
-#include "date.h"
-#include "condition_parser.h"
-#include "node.h"
-#include "UnitTestFramework.h"
-#include "main.h"
-
 #include <iostream>
 #include <stdexcept>
+
+#include "database.h"
+//#include "date.h"
+#include "condition_parser.h"
+//#include "node.h"
+//#include "UnitTestFramework.h"
+#include "main.h"
+
+
 //#define DEBUG
 
 void TestAll(); 

@@ -1,9 +1,7 @@
-#include "condition_parser_test.h"
+#include <sstream>
 #include "condition_parser.h"
-
 #include "UnitTestFramework.h"
 
-#include <sstream>
 using namespace std;
 
 void TestParseCondition() {

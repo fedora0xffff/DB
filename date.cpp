@@ -3,7 +3,7 @@
 
 //#define DEBUG
 
-Date::Date(int yyyy, short mm, short dd, char delim = '-') {
+Date::Date(int yyyy, short mm, short dd, char delim) {
         if (yyyy >= 0 && yyyy < 10000) {
             yyyy_ = yyyy;
         }
