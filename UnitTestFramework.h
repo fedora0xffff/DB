@@ -11,7 +11,7 @@
 #include "date.h"
 
 namespace std {
-    //interface 
+
     template<class T, class U>
     void AssertEqual(const T& t, const U& u, const string& hint);
     
@@ -24,7 +24,6 @@ namespace std {
     template <typename Collection>
     std::string Join(const Collection& collection, char delim);
 
-    //impl
 
     template <class T>
     ostream& operator << (ostream& os, const set<T>& s) {

@@ -2,11 +2,9 @@
 #include <stdexcept>
 
 #include "database.h"
-//#include "date.h"
 #include "condition_parser.h"
-//#include "node.h"
-//#include "UnitTestFramework.h"
 #include "main.h"
+#include "database_test.h"
 
 
 //#define DEBUG
@@ -55,6 +53,23 @@ int main() {
       } catch (invalid_argument&) {
           cout << "No entries" << endl;
       }
+    } else if (command == "Del") {
+      auto condition = ParseCondition(is); //ptr to a Node
+      auto predicate = [condition](const Date& date, const string& event) {
+        return condition->Evaluate(date, event);
+      };
+      int count = db.RemoveIf(predicate);
+      cout << "Removed " << count << " entries" << endl;
+    } else if (command == "Find") {
+      auto condition = ParseCondition(is);
+      auto predicate = [condition](const Date& date, const string& event) {
+        return condition->Evaluate(date, event);
+      };
+      const auto entries = db.FindIf(predicate);
+      for (const auto& entry : entries) {
+        cout << entry << endl;
+      }
+      cout << "Found " << entries.size() << " entries" << endl;
     } else if (command.empty()) {
       continue;
     } else {
@@ -89,27 +104,5 @@ void TestAll() {
   tr.RunTest(TestParseEvent, "TestParseEvent");
   tr.RunTest(TestDateOps, "date test");
   tr.RunTest(TestParseCondition, "TestParseCondition");
+  tr.RunTest(TestDB, "TestDB");
 }
-
-/*
- } else if (command == "Del") {
-      auto condition = ParseCondition(is);
-      auto predicate = [condition](const Date& date, const string& event) {
-        return condition->Evaluate(date, event);
-      };
-      int count = db.RemoveIf(predicate);
-      cout << "Removed " << count << " entries" << endl;
-    } else if (command == "Find") {
-      auto condition = ParseCondition(is);
-      auto predicate = [condition](const Date& date, const string& event) {
-        return condition->Evaluate(date, event);
-      };
-
-      const auto entries = db.FindIf(predicate);
-      for (const auto& entry : entries) {
-        cout << entry << endl;
-      }
-      cout << "Found " << entries.size() << " entries" << endl;
-
- 
- */

@@ -31,3 +31,31 @@ std::string Database::Last(const Date& date) {
 		return res;
 	}
 } 
+
+int Database::RemoveIf(std::function<bool(const Date&, const std::string&)> predicat) {
+	int count = 0;
+	for (auto it = db_.begin(); it != db_.end();) {
+		auto element = *it;
+		if (predicat(element.first, element.second)) {
+			db_.erase(it);
+			++count;
+		}
+		++it;
+	}
+	return count;
+}
+
+
+std::vector<std::string> Database::FindIf(std::function<bool(const Date&, const std::string&)> predicat) {
+	int count = 0;
+	std::vector<std::string> res = {};
+	for (auto it = db_.begin(); it != db_.end();) {
+		auto element = *it;
+		if (predicat(element.first, element.second)) {
+			res.push_back(element.first.PrintDate() + " " + element.second);
+			++count;
+		}
+		++it;
+	}
+	return res;
+}
