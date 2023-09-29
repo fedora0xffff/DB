@@ -12,6 +12,7 @@ void TestDB() {
         db.Add(Date{2021, 01, 15}, "C++ start");
         db.Add(Date{2020, 12, 4}, "Fedor's Bday");
         db.Add(Date{2021, 12, 4}, "Fedor's Bday");
+        db.Print(std::cout);
         std::istringstream is(R"(event == "Apocalypse")");
         std::istringstream is1(R"(event == "Fedor's Bday")");
         std::shared_ptr<Node> root = ParseCondition(is);

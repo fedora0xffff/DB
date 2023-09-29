@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17
-objects =  UnitTestFramework.o date.o database.o main.o condition_parser.o condition_parser_test.o node.o token.o 
+objects =  UnitTestFramework.o date.o database.o main.o condition_parser.o condition_parser_test.o node.o token.o database_test.o  
 
 all: $(objects)
 	$(CXX) -o $@ $(CXXFLAGS) $(objects) $(LDFLAGS) $(LDLIBS)

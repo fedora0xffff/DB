@@ -8,7 +8,7 @@ void Database::Add(const Date& date, const std::string& event){
 		db_[date] = event;
 	}
 	//DBG
-	std::cout << "DB flush : " << db_ << std::endl;
+	//std::cout << "DB flush : " << db_ << std::endl;
 }
 
 void Database::Print(std::ostream& os) const {
@@ -35,12 +35,13 @@ std::string Database::Last(const Date& date) {
 int Database::RemoveIf(std::function<bool(const Date&, const std::string&)> predicat) {
 	int count = 0;
 	for (auto it = db_.begin(); it != db_.end();) {
-		auto element = *it;
+		auto this_it = it++;
+		auto element = *this_it;
 		if (predicat(element.first, element.second)) {
-			db_.erase(it);
+			std::cout << "Erasing: " << element.first.PrintDate() << " " << element.second << std::endl;
+			db_.erase(this_it);
 			++count;
 		}
-		++it;
 	}
 	return count;
 }
@@ -52,6 +53,7 @@ std::vector<std::string> Database::FindIf(std::function<bool(const Date&, const 
 	for (auto it = db_.begin(); it != db_.end();) {
 		auto element = *it;
 		if (predicat(element.first, element.second)) {
+			std::cout << "Found: " << element.first.PrintDate() << " " << element.second << std::endl;
 			res.push_back(element.first.PrintDate() + " " + element.second);
 			++count;
 		}
