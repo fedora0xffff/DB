@@ -25,8 +25,6 @@ std::string ParseEvent(std::istream& is) { //test
 	return event;
 }
 
-
-
 int main() {
   using namespace std;
 

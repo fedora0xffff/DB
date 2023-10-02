@@ -12,7 +12,7 @@ void TestDB() {
         db.Add(Date{2021, 01, 15}, "C++ start");
         db.Add(Date{2020, 12, 4}, "Fedor's Bday");
         db.Add(Date{2021, 12, 4}, "Fedor's Bday");
-        db.Print(std::cout);
+        //db.Print(std::cout);
         std::istringstream is(R"(event == "Apocalypse")");
         std::istringstream is1(R"(event == "Fedor's Bday")");
         std::shared_ptr<Node> root = ParseCondition(is);
@@ -25,7 +25,7 @@ void TestDB() {
         };
         std::AssertEqual(db.RemoveIf(predicate), 1, "Apocalypse not found");
         std::AssertEqual(db.RemoveIf(predicate1), 2, "Fedor has 2 bdays");
-        db.Print(std::cout);
+        //db.Print(std::cout);
     }
     {
         Database db;

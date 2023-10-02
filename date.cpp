@@ -1,5 +1,6 @@
 #include "date.h"
 #include <cctype>
+#include <iomanip>
 
 //#define DEBUG
 
@@ -16,22 +17,24 @@ Date::Date(int yyyy, short mm, short dd, char delim) {
         if (yyyy_ == 0 && mm_ == 1 && dd_ == 1) {
             std::cout << "probably sth went wrong with init\n";
         }
-    }
-    std::string Date::PrintDate() const{
-	    std::string date{std::to_string(yyyy_) + delimiter_ + std::to_string(mm_) + delimiter_ + std::to_string(dd_)};
-	    return date;
-    }
+}
+std::string Date::PrintDate() const{
+		std::stringstream ss; 
+		ss << yyyy_ << delimiter_ << std::setfill('0') << std::setw(2) << mm_;
+		ss << delimiter_ << std::setfill('0') << std::setw(2) << dd_;
+	    return ss.str();
+}
 
-    Date::Date(const Date& d) {
+Date::Date(const Date& d) {
         if (!d.empty) {
             yyyy_ = d.yyyy_;
             mm_ = d.mm_;
             dd_ = d.dd_;
         }
-    }
+}
 
 std::ostream& operator<<(std::ostream& os, const Date& date) {
-    os << date.yyyy_ << date.delimiter_ << date.mm_ << date.delimiter_ << date.dd_;
+    os << date.PrintDate();
     return os;
 }
 

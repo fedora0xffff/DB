@@ -1,7 +1,9 @@
 #pragma once
 #include <functional>
 #include <map>
-//#include "date.h"
+#include <set>
+#include <utility>
+
 #include "UnitTestFramework.h" //includes date
 
 
@@ -15,5 +17,6 @@ class Database {
     std::string Last(const Date& date);
 
     private:
-    std::map<Date, std::string> db_;
+    std::multimap<Date, std::string> db_;
+    std::set<std::string> dates_;
 };
