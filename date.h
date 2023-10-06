@@ -20,7 +20,7 @@ class Date {
     friend bool operator>(const Date& lhs, const Date& rhs);
 
     Date() { empty = true;}
-    Date(int yyyy, short mm, short dd, char delim = '-');
+    Date(int yyyy, int mm, int dd, char delim = '-');
     Date(const Date& d);
     std::string PrintDate() const;
 
@@ -32,6 +32,6 @@ class Date {
     bool empty = false;
 };
 
-Date ParseDate(std::istringstream& is); 
+Date ParseDate(std::istream& is); 
 void TestDateOps();
 //std::ostream& operator<<(std::ostream& os, const Date& date);

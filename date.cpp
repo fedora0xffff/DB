@@ -4,7 +4,7 @@
 
 //#define DEBUG
 
-Date::Date(int yyyy, short mm, short dd, char delim) {
+Date::Date(int yyyy, int mm, int dd, char delim) {
         if (yyyy >= 0 && yyyy < 10000) {
             yyyy_ = yyyy;
         }
@@ -20,7 +20,8 @@ Date::Date(int yyyy, short mm, short dd, char delim) {
 }
 std::string Date::PrintDate() const{
 		std::stringstream ss; 
-		ss << yyyy_ << delimiter_ << std::setfill('0') << std::setw(2) << mm_;
+		ss << std::setfill('0') << std::setw(4) << yyyy_;
+		ss << delimiter_<< std::setfill('0') << std::setw(2) << mm_;
 		ss << delimiter_ << std::setfill('0') << std::setw(2) << dd_;
 	    return ss.str();
 }
@@ -59,7 +60,7 @@ bool operator!=(const Date& lhs, const Date& rhs) {
  	else return false;
  }
 
-Date ParseDate(std::istringstream& is) { 
+Date ParseDate(std::istream& is) { 
 	std::vector<std::string> dates(3);
 	char c;
 	c = is.peek();
