@@ -13,8 +13,8 @@ class Database {
     void Add(const Date& date, const std::string& event);
     void Print(std::ostream& os) const;
     int RemoveIf(std::function<bool(const Date&, const std::string&)> predicat);
-    std::vector<std::string> FindIf(std::function<bool(const Date&, const std::string&)> predicat);
-    std::string Last(const Date& date);
+    std::vector<std::string> FindIf(std::function<bool(const Date&, const std::string&)> predicat) const;
+    std::string Last(const Date& date) const;
 
     private:
     std::multimap<Date, std::string> db_;

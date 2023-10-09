@@ -35,7 +35,10 @@ Date::Date(const Date& d) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Date& date) {
-    os << date.PrintDate();
+	os << std::setfill('0') << std::setw(4) << date.yyyy_;
+	os << date.delimiter_<< std::setfill('0') << std::setw(2) << date.mm_;
+	os << date.delimiter_ << std::setfill('0') << std::setw(2) << date.dd_;
+   // os << date.PrintDate();
     return os;
 }
 
@@ -62,8 +65,8 @@ bool operator!=(const Date& lhs, const Date& rhs) {
 
 Date ParseDate(std::istream& is) { 
 	std::vector<std::string> dates(3);
-	char c;
-	c = is.peek();
+//	char c;
+//	c = is.peek();
 	std::getline(is, dates[0], '-');
 	std::getline(is, dates[1], '-'); 
 	std::getline(is, dates[2], ' ');

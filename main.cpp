@@ -3,7 +3,7 @@
 
 #include "database.h"
 #include "condition_parser.h"
-#include "main.h"
+//#include "main.h"
 #include "database_test.h"
 
 
@@ -13,12 +13,10 @@ void TestAll();
 
 std::string ParseEvent(std::istream& is) { //test
 	std::string event = {};
-	char c;
-	bool first = true;
-  is >> std::ws;
-	if (c != EOF) {
-    std::getline(is, event);
-    }	
+	//char c;
+	//bool first = true;
+ 	 is >> std::ws;
+   	 std::getline(is, event);
 #ifdef DEBUG
 		std::cout << "parsed event: " << event << std::endl;
 #endif

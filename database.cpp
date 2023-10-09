@@ -8,12 +8,12 @@ void Database::Add(const Date& date, const std::string& event){
 }
 
 void Database::Print(std::ostream& os) const {
-	for (const auto& elem: db_) {
-		std::cout << elem.first << " " << elem.second << "\n";
+	for (const auto& elem: db_) { //перенести преобразования сюда?
+		os << elem.first << " " << elem.second << std::endl;
 	}
 }
 
-std::string Database::Last(const Date& date) {
+std::string Database::Last(const Date& date) const {
 	auto last_date = std::upper_bound(db_.begin(), db_.end(), date, 
 			[](const Date& val, const std::pair<Date, std::string>& date_in_db) {
 			return  date_in_db.first > val;
@@ -43,7 +43,7 @@ int Database::RemoveIf(std::function<bool(const Date&, const std::string&)> pred
 }
 
 
-std::vector<std::string> Database::FindIf(std::function<bool(const Date&, const std::string&)> predicat) {
+std::vector<std::string> Database::FindIf(std::function<bool(const Date&, const std::string&)> predicat) const {
 	int count = 0;
 	std::vector<std::string> res = {};
 	for (auto it = db_.begin(); it != db_.end();) {
