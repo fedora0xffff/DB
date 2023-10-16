@@ -8,14 +8,11 @@ Date::Date(int yyyy, int mm, int dd, char delim) {
         if (yyyy >= 0 && yyyy < 10000) {
             yyyy_ = yyyy;
         }
-        if (mm > 1 && mm < 13) {
+        if (mm > 0 && mm < 13) {
             mm_ = mm;
         }
         if (dd > 0 && dd < 32) {
             dd_ = dd;
-        }
-        if (yyyy_ == 0 && mm_ == 1 && dd_ == 1) {
-            std::cout << "probably sth went wrong with init\n";
         }
 }
 std::string Date::PrintDate() const{

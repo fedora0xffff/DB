@@ -21,11 +21,9 @@ std::string Database::Last(const Date& date) const {
 	if (last_date == db_.begin()) {
 		return "No entries";
 	}
-	else {
-		auto target = std::prev(last_date);
-		std::string res = (*target).first.PrintDate() + " " + (*target).second;
-		return res;
-	}
+	auto target = std::prev(last_date);
+	std::string res = (*target).first.PrintDate() + " " + (*target).second;
+	return res;
 } 
 
 int Database::RemoveIf(std::function<bool(const Date&, const std::string&)> predicat) {
@@ -34,8 +32,8 @@ int Database::RemoveIf(std::function<bool(const Date&, const std::string&)> pred
 		auto this_it = it++;
 		auto element = *this_it;
 		if (predicat(element.first, element.second)) {
-			//std::cout << "Erasing: " << element.first.PrintDate() << " " << element.second << std::endl;
 			db_.erase(this_it);
+			dates_.erase(element.first.PrintDate()+element.second);
 			++count;
 		}
 	}
@@ -49,7 +47,6 @@ std::vector<std::string> Database::FindIf(std::function<bool(const Date&, const 
 	for (auto it = db_.begin(); it != db_.end();) {
 		auto element = *it;
 		if (predicat(element.first, element.second)) {
-			//std::cout << "Found: " << element.first.PrintDate() << " " << element.second << std::endl;
 			res.push_back(element.first.PrintDate() + " " + element.second);
 			++count;
 		}
