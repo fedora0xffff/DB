@@ -7,19 +7,12 @@
 #include "database_test.h"
 
 
-//#define DEBUG
-
 void TestAll(); 
 
 std::string ParseEvent(std::istream& is) { //test
 	std::string event = {};
-	//char c;
-	//bool first = true;
  	 is >> std::ws;
    	 std::getline(is, event);
-#ifdef DEBUG
-		std::cout << "parsed event: " << event << std::endl;
-#endif
 	return event;
 }
 
@@ -37,9 +30,6 @@ int main() {
     if (command == "Add") {
       const auto date = ParseDate(is);
       const auto event = ParseEvent(is);
-      #ifdef DEBUG
-      cout << "DBG: " << date << " " << event << endl;;
-      #endif
       db.Add(date, event);
     } else if (command == "Print") {
       db.Print(cout);

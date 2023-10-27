@@ -25,7 +25,7 @@ void TestDB() {
         };
         std::AssertEqual(db.RemoveIf(predicate), 1, "Apocalypse not found");
         std::AssertEqual(db.RemoveIf(predicate1), 2, "Fedor has 2 bdays");
-        //db.Print(std::cout);
+       //db.Print(std::cout);
     }
     {
         Database db;
