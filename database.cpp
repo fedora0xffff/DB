@@ -34,17 +34,19 @@ int Database::RemoveIf(std::function<bool(const Date&, const std::string&)> pred
 		auto res = std::stable_partition(element.second.begin(), element.second.end(), [=] (const std::string& str) {
 			return !predicat(element.first, str); //evals to true for the ones to delete
 		});
+		//std::cout << "vec after stable partition " << element.second << std::endl;
 		int curr_count = std::distance(res, element.second.end());
 		count += curr_count;
+		//std::cout << "if res == end: " << (res == element.second.end()) << std::endl;
 		if (curr_count == 0) continue;
 		if (res == element.second.begin()) db_m.erase(element.first); //may be all events under this date were in the condition to delete
 		else {
 			auto last_elem = std::prev(element.second.end());
-			while(last_elem <= res) {
+			//std::cout << "prev(end) is " << *last_elem << std::endl;
+			while(last_elem >= res) {
 				auto this_it = last_elem--;
 				element.second.erase(this_it);
 			}
-			
 		}
 	}
 	return count;
@@ -55,7 +57,7 @@ std::vector<std::string> Database::FindIf(std::function<bool(const Date&, const 
 	for (auto it = db_m.begin(); it != db_m.end();) {
 		auto element = *it;
 		for (const auto& elem : element.second) {
-			if(predicat(element.first, elem)) res.push_back(element.first.PrintDate() + " " + elem);
+			if (predicat(element.first, elem)) res.push_back(element.first.PrintDate() + " " + elem);
 		}
 		++it;
 	}
